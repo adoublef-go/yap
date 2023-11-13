@@ -58,14 +58,4 @@ func run(ctx context.Context, opts *server.Options) (err error) {
 		return s.Shutdown(context.Background())
 	})
 	return g.Wait()
-	// errCh := make(chan error, 1)
-	// go func() {
-	// 	errCh <- s.ListenAndServe()
-	// }()
-	// select {
-	// case err := <-errCh:
-	// 	return err
-	// case <-ctx.Done():
-	// 	return s.Shutdown(context.Background())
-	// }
 }
