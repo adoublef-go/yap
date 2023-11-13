@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  nginx:
+    container_name: yap-nginx
+    build:
+      context: ./nginx
+      target: runtime
+    ports:
+      - 8080:80
+    networks:
+      - yap-network
+
+  lhr:
+    container_name: yap-lhr
+    build:
+      context: .
+      target: runtime
+      args:
+        - LITEFS_CONFIG=litefs.nginx.yml
+    privileged: true
+    environment:
+      - FLY_REGION=lhr
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    ports:
+      - 8222:8222
+    networks:
+      - yap-network
+
+  iad:
+    container_name: yap-iad
+    build:
+      context: .
+      target: runtime
+      args:
+        - LITEFS_CONFIG=litefs.nginx.yml
+    privileged: true
+    environment:
+      - FLY_REGION=iad
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    networks:
+      - yap-network
+
+  syd:
+    container_name: yap-syd
+    build:
+      context: .
+      target: runtime
+      args:
+        - LITEFS_CONFIG=litefs.nginx.yml
+    privileged: true
+    environment:
+      - FLY_REGION=syd
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    networks:
+      - yap-network
+
+networks:
+  yap-network:

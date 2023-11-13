@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐨 Rooms</title>
+    <link rel="stylesheet" href='{{static "styles.css"}}'>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/signin/github">Sign in with GitHub</a></li>
+                <li><a href="/signout">Sign out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <header>
+            <hgroup>
+                <h1>🐨 Rooms</h1>
+            </hgroup>
+        </header>
+        <section id="new-room">
+            <!-- TODO pass action via template -->
+            <form action="/" method="post">
+                <button type="submit" disabled>New</button>
+            </form>
+        </section>
+        <section id="room-list">
+            <ul>
+                {{range .Rooms}}
+                <li>
+                    <article>
+                        <h2>Room #1</h2>
+                        <!-- TODO link to room -->
+                        <a href="#">Enter</a>
+                    </article>
+                </li>
+                {{end}}
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p><small>Powered by <a href="https://go.dev">Golang</a>.</small></p>
+        <p><small>Instance ID: {{env "FLY_REGION"}}</small></p>
+    </footer>
+</body>
+
+</html>
